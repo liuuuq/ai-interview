@@ -41,6 +41,14 @@ export function useTTS() {
     setIsSpeaking(false);
   }, []);
 
+  const init = useCallback(() => {
+    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+    // 播放一段静音的空白文本来获取浏览器的语音播放权限
+    const utterance = new SpeechSynthesisUtterance(' ');
+    utterance.volume = 0;
+    window.speechSynthesis.speak(utterance);
+  }, []);
+
   const toggleTTS = useCallback(() => {
     setTtsEnabled(prev => {
       if (prev) {
@@ -58,5 +66,6 @@ export function useTTS() {
     speak,
     stop,
     toggleTTS,
+    init,
   };
 }

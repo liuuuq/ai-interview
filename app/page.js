@@ -16,7 +16,7 @@ export default function Home() {
   const pendingTextRef = useRef('');
   const debounceTimerRef = useRef(null);
 
-  const { speak, ttsEnabled, toggleTTS } = useTTS();
+  const { speak, ttsEnabled, toggleTTS, init: initTTS } = useTTS();
 
   // 发送消息给 AI
   const sendToAI = useCallback(async (userText, allMessages) => {
@@ -140,6 +140,7 @@ export default function Home() {
 
   // 切换麦克风
   const toggleMic = useCallback(() => {
+    initTTS(); // 在用户交互的同步流程中调用，获取移动端语音播报权限
     if (isListening) {
       stopListening();
       // 如果有待发送的文字，立即发送
@@ -217,7 +218,7 @@ export default function Home() {
       }
       startListening();
     }
-  }, [isListening, stopListening, startListening, messages, currentMode, sendToAI, speak]);
+  }, [isListening, stopListening, startListening, messages, currentMode, sendToAI, speak, initTTS]);
 
   // 切换模式
   const handleModeChange = useCallback((e) => {
