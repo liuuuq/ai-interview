@@ -20,11 +20,17 @@ export const metadata = {
   description: '一个像素风格的AI实时访谈应用，支持语音输入、实时字幕和多种访谈模式。',
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: 'cover',
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="zh-CN" className={`${pressStart2P.variable} ${notoSansSC.variable}`}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body>
         {children}
