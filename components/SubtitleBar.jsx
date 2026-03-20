@@ -13,7 +13,7 @@ export default function SubtitleBar({ interimText, isListening }) {
 
   return (
     <div className="subtitle-bar">
-      <span className="subtitle-label">识别中</span>
+      <span className="subtitle-label">识别语音中</span>
       <span className="subtitle-text">
         {interimText || '等待语音输入…'}
         {interimText && <span className="subtitle-cursor"></span>}
